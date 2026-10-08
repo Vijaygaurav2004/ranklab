@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RankLab</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">RankLab <span id="run-name" class="muted"></span></div>
+    <nav>
+      <button class="tab active" data-view="vote">Vote</button>
+      <button class="tab" data-view="board">Leaderboard</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-vote">
+      <div class="progress"><div id="progress-bar"></div></div>
+      <p id="progress-text" class="muted small"></p>
+
+      <div id="vote-area" hidden>
+        <article class="card prompt">
+          <span id="prompt-category" class="chip"></span>
+          <pre id="prompt-text"></pre>
+        </article>
+
+        <div class="answers">
+          <article class="card answer">
+            <h3>Answer A</h3>
+            <pre id="answer-left"></pre>
+          </article>
+          <article class="card answer">
+            <h3>Answer B</h3>
+            <pre id="answer-right"></pre>
+          </article>
+        </div>
+
+        <input id="reason" type="text" maxlength="1000" placeholder="Why? One line, saved with your vote (optional)">
+        <div class="choices">
+          <button data-choice="left" class="primary">A is better <kbd>1</kbd></button>
+          <button data-choice="tie">Tie <kbd>3</kbd></button>
+          <button data-choice="both_bad">Both bad <kbd>4</kbd></button>
+          <button data-choice="right" class="primary">B is better <kbd>2</kbd></button>
+        </div>
+        <p class="muted small hint">Models stay hidden until you vote. Sides are shuffled for every pair.
+          <button id="undo" class="link">Undo last vote</button></p>
+      </div>
+
+      <div id="done" class="card done" hidden>
+        <h2>Every pair is rated</h2>
+        <p class="muted">Your votes are saved. See how the models rank, and how often the AI judge agreed with you.</p>
+        <button class="button" data-goto="board">Open the leaderboard</button>
+      </div>
+    </section>
+
+    <section id="view-board" hidden>
+      <div id="board"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

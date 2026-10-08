@@ -1,0 +1,228 @@
+:root {
+  --bg: #f6f6f3;
+  --panel: #ffffff;
+  --ink: #1c1c1f;
+  --muted: #696970;
+  --line: #e2e2dd;
+  --accent: #2f5bd3;
+  --accent-ink: #ffffff;
+  --chip: #edf1fc;
+  --warn: #b5541c;
+  --radius: 12px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131315;
+    --panel: #1c1c1f;
+    --ink: #ececef;
+    --muted: #9b9ba3;
+    --line: #2f2f35;
+    --accent: #7f9dff;
+    --accent-ink: #0c0c10;
+    --chip: #252a39;
+    --warn: #f0a070;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { font-weight: 700; letter-spacing: 0.2px; }
+.muted { color: var(--muted); font-weight: 400; }
+.small { font-size: 13px; }
+
+nav { display: flex; gap: 4px; }
+
+.tab {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tab.active { background: var(--chip); color: var(--ink); font-weight: 600; }
+
+main { max-width: 1180px; margin: 0 auto; padding: 20px; }
+
+.progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+#progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 0.3s; }
+#progress-text { margin: 6px 0 16px; }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--chip);
+  border-radius: 99px;
+  padding: 2px 10px;
+}
+
+pre {
+  margin: 10px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+.answer { display: flex; flex-direction: column; min-width: 0; }
+.answer h3 { margin: 0; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.answer pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13.5px;
+  line-height: 1.55;
+  max-height: 58vh;
+  overflow: auto;
+}
+
+#reason {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+}
+
+#reason:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.choices { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+
+.choices button {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.choices button:hover { border-color: var(--accent); }
+.choices button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.choices button:disabled { opacity: 0.6; cursor: wait; }
+
+kbd {
+  font: 11px ui-monospace, Menlo, monospace;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin-left: 6px;
+  opacity: 0.75;
+}
+
+.hint { margin-top: 10px; }
+
+.link {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0 0 8px;
+}
+
+.done { text-align: center; padding: 36px 18px; }
+.done h2 { margin-top: 0; }
+
+.button {
+  display: inline-block;
+  padding: 9px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button:hover { border-color: var(--accent); }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.toast.error { background: var(--warn); color: #fff; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.stat .label { font-size: 13px; color: var(--muted); }
+.stat .value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat .detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+h2 { font-size: 17px; margin: 28px 0 10px; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr:last-child td { border-bottom: 0; }
+
+.ci { position: relative; height: 8px; min-width: 140px; background: var(--line); border-radius: 99px; }
+.ci span { position: absolute; top: 0; height: 100%; background: var(--accent); opacity: 0.45; border-radius: 99px; }
+.ci i { position: absolute; top: -3px; width: 2px; height: 14px; background: var(--ink); }
+
+.note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.note.warn { color: var(--warn); }
+.empty { color: var(--muted); margin: 0; padding: 14px 16px; border: 1px dashed var(--line); border-radius: var(--radius); }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+
+@media (max-width: 760px) {
+  main { padding: 14px; }
+  .answers, .stats { grid-template-columns: 1fr; }
+  .choices { grid-template-columns: 1fr 1fr; }
+  .top { padding: 10px 14px; }
+  .range { display: none; }
+  th, td { padding: 8px 10px; }
+}
